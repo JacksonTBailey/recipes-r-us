@@ -40,10 +40,6 @@
       "last 1 safari version"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@bitbucket.org/trillitech/fe-skill-test-recipe-api.git"
-  },
   "keywords": [
     "api",
     "fe",
@@ -51,8 +47,5 @@
     "test",
     "front",
     "end"
-  ],
-  "author": "Crescendo Collective",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/trillitech/fe-skill-test-recipe-api#readme"
+  ]
 }

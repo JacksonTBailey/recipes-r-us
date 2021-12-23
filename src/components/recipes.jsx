@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, Link, useLocation} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useLocation, NavLink} from 'react-router-dom';
 import RecipeCard from './recipeCard';
+import RecipeInstructionsTemplate from './recipeInstructionsTemplate';
 
 export default function Recipes() {
     const recipeApi = `http://localhost:3001/recipes`;
     const specialRecipeApi = `http://localhost:3001/specials`;
 
-    const [recipes, setRecipes] = useState([])
-    const [specialRecipes, setSpecialRecipes] = useState([])
+    const [recipes, setRecipes] = useState([]);
+    const [specialRecipes, setSpecialRecipes] = useState([]);
+
+    const location = useLocation();
+    const recipeID = location.pathname.split('/:').pop();
 
     //Getting data from regular recipe API
-    useEffect(async () => {
-        await fetch(recipeApi)        
+    useEffect(() => {
+        fetch(recipeApi)        
         .then((response) => {
             let res = response.json()
             return res
@@ -22,8 +26,8 @@ export default function Recipes() {
     }, [recipeApi])
 
     //Getting data from special recipe API
-    useEffect(async () => {
-        await fetch(specialRecipeApi)        
+    useEffect(() => {
+        fetch(specialRecipeApi)        
         .then((response) => {
             let res = response.json()
             return res
@@ -36,12 +40,13 @@ export default function Recipes() {
 
     return (
         <React.Fragment>
-            <h1>Regular Recipes</h1>
-            <div>
-                {recipes.map(({images, uuid, title, description, servings, cookTime, prepTime}) => (
-                    <RecipeCard images={images} uuid={uuid} key={uuid} title={title} description={description} servings={servings} cookTime={cookTime} prepTime={prepTime}/>
-                ))}
-            </div>
+                <Routes>
+                    <Route path='/'>
+                        <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
+                        <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
+                        <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
+                    </Route>
+                </Routes>
         </React.Fragment>
     )
 
