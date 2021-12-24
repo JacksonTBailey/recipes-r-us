@@ -3,13 +3,12 @@
 .recipe-card-body{
     display: flex;
     width: 100vw;
-    height: 100vh;
     justify-content: center;
 }
 
 .recipe-card-product{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     align-content:center;
     gap: 2rem;
 }
