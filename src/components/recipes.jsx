@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Routes, Route, useLocation, NavLink} from 'react-router-dom';
 import RecipeCard from './recipeCard';
 import RecipeInstructionsTemplate from './recipeInstructionsTemplate';
+import Header from './header';
 
 export default function Recipes() {
     const recipeApi = `http://localhost:3001/recipes`;
@@ -40,13 +41,16 @@ export default function Recipes() {
 
     return (
         <React.Fragment>
-                <Routes>
-                    <Route path='/'>
-                        <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
-                        <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
-                        <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
-                    </Route>
-                </Routes>
+            
+            <Header/>
+
+            <Routes>
+                <Route path='/'>
+                    <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
+                    <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
+                    <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
+                </Route>
+            </Routes>
         </React.Fragment>
     )
 

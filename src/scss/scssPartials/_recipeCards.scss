@@ -1,0 +1,19 @@
+@use "../abstracts/" as a;
+
+.recipe-card-body{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+}
+
+.recipe-card-product{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-content:center;
+    gap: 2rem;
+}
+
+.recipe-link{
+   @include a.cardStyling(a.$lavender)
+}

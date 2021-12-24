@@ -1,0 +1,96 @@
+@use '../abstracts/' as a;
+
+.primary-header{
+    position: fixed;
+    width: 100%;
+    height: 10%;
+    z-index: 100;
+
+    .mobile-nav-toggle{
+        display:none;
+    }
+    
+    .primary-navigation{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background: hsl(0 0% 100% / .75);
+
+        
+        .navbar-link{
+            font-size: x-large;
+            text-decoration: none;
+            color: a.$lavender;
+        }
+         > [aria-hidden = "true"]{
+            font-weight: 700;
+            margin-inline-end: .5em;
+        }
+        
+    }
+    @supports (backdrop-filter: blur(1rem)){
+        .primary-navigation{
+            background: hsl(0 0% 100% / .1);
+            backdrop-filter: blur(.5rem);    
+        }
+    }
+    @media (max-width:35em) {
+        .primary-navigation {
+            --gap: 2em;
+
+            position: fixed;
+            z-index: 1000;
+            inset: 0 0 0 0vw;
+
+            flex-direction: column;
+            padding: min(30vh,10rem) 2em;
+
+            transform: translateX(100%);
+            transition: transform 350ms ease-in-out;
+            justify-content: center;
+            align-items: center;
+            background-color: a.$manatee;
+        }
+        
+        .primary-navigation[data-visible="true"]{
+            transform: translateX(0%);
+        }
+
+        .mobile-nav-toggle {
+            display: block;
+            position: absolute;
+            z-index: 9999;
+            background-color: a.$manatee;
+            background: url("../../images/icon-hamburger.svg");
+            background-repeat: no-repeat;
+            width: 2rem;
+            border:0;
+            aspect-ratio: 1;
+            top: 2rem;
+            right: 2rem;
+        }
+        .mobile-nav-toggle[aria-expanded="true"]{
+            background-image: url("../../images/icon-close.svg");
+        }
+    }
+
+    @media (min-width:35em) and (max-width:55em){
+        .primary-navigation .navbar-link> [aria-hidden]{
+            display: none;
+        }
+    }
+
+    @media (min-width: 35em) {
+        .primary-navigation{
+            --gap: clamp(1.5rem, 5vw, 3rem);
+            padding-block: 2rem;
+            padding-inline: clamp(3rem, 5vw, 10rem)
+        }
+    }
+}
+
+.flex{
+    display: flex;
+    gap: var(--gap, 1rem);
+    justify-content: flex-end;
+}
