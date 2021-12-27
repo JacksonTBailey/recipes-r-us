@@ -9,22 +9,17 @@
 
 .recipe-card-product{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     align-content:center;
     gap: 2rem;
+    resize: horizontal;
+    overflow:auto;
+    width: clamp(90%, 50vw, 100%);
+    padding: 2rem;
 }
 
 .recipe-link{
-   @include a.cardStyling(a.$lavender);
-   text-decoration:none;
-   border-radius: 3%;
-
-   &:hover{
-       h2{
-        color:a.$pomegranate;
-        transition: .3s;
-       }
-   }
+   @include a.cardStyling(a.$lavender, a.$pomegranate, a.$pomegranate);
 }
 
 .recipe-img{
@@ -32,38 +27,10 @@
 
     img{
         display: block;
-        height: 356px;
-        width: 570px;
-        object-fit: none;
+        object-fit:scale-down;
+        width: 100%;
         border-radius: 3% 3% 0 0;
-
     }
-
-    // .image-overlay{
-    //     position: absolute;
-    //     bottom: 0%;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 20%;
-    //     background: rgba(0, 0, 0, 0.6);
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: start;
-    //     justify-content: center;
-    //     opacity: 1;
-    
-    //     p{
-    //         color: a.$white;
-    //         font-size: 1.5rem;
-    //         font-weight: bold;
-    //         margin-left: 5%;
-    //     }
-    // }
-    // @media(hover){
-    //     .image-overlay{
-    //         opacity:0;
-    //     }
-    // }
 }
 
 .recipe-content{
@@ -72,9 +39,42 @@
     .recipe-header{
         margin-bottom: 3%;
         color: a.$charcoal;
+        font-size: clamp(20px, 6vw, 30px);
     }
     .recipe-description{
         margin-bottom: 3%;
         color: a.$charcoal;
+        font-size: clamp(12px, 4vw, 18px);
+    }
+}
+
+@media screen and (min-width:630px) and (max-width: 1439px){
+    .recipe-card-product{
+        grid-template-columns: repeat(1, 1fr);
+        width: auto;
+    }
+    
+    .recipe-img{
+        img{
+            object-fit: none;
+            height: 356px;
+            width: 570px;
+        }
+    }
+}
+
+
+@media screen and (min-width:1200px){
+    .recipe-card-product{
+        grid-template-columns: repeat(2, 1fr);
+        width: auto;
+    }
+    
+    .recipe-img{
+        img{
+            object-fit: none;
+            height: 356px;
+            width: 570px;
+        }
     }
 }

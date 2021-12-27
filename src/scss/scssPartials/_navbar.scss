@@ -23,6 +23,11 @@
             font-size: x-large;
             text-decoration: none;
             color: a.$lavender;
+
+            &:hover{
+                color: a.$pomegranate;
+                transition: .3s;
+            }
         }
          > [aria-hidden = "true"]{
             font-weight: 700;

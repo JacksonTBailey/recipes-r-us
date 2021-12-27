@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom'
 
-export default function RecipeCardTemplate({images, title, uuid, description, servings, cookTime, prepTime}) {
+export default function RecipeCardTemplate({images, title, uuid, description}) {
     
 
     //This assesses the current screen size, checks if the size has changed, and updates it if it has.
@@ -28,11 +28,7 @@ export default function RecipeCardTemplate({images, title, uuid, description, se
             <NavLink to={`/recipes/:${uuid}`} className='recipe-link' key={uuid}>
                 <article className='recipe-card' id={uuid}>
                     <figure className='recipe-img'>
-                        <img src={`http://localhost:3001${(screenSize.dynamicWidth >= 993) ? images.medium : images.small}`} alt={`${title}`}/>
-                        {/* <div className='image-overlay'>
-                            <p className='cook-time'>Time: {cookTime + prepTime} minutes</p>
-                            <p className='serving-size'>Serves: {servings}</p>
-                        </div> */}
+                        <img src={`http://localhost:3001${(screenSize.dynamicWidth >= 265) ? images.medium : images.small}`} alt={`${title}`}/>
                     </figure>
 
                     <section className='recipe-content'>

@@ -6,8 +6,8 @@ export default function RecipeCard({recipes}) {
         <React.Fragment>
             <div className='recipe-card-body'>
                 <section className='recipe-card-product'>
-                    {recipes.map(({images, uuid, title, description, servings, cookTime, prepTime}) => (
-                        <RecipeCardTemplate images={images} uuid={uuid} key={uuid} title={title} description={description} servings={servings} cookTime={cookTime} prepTime={prepTime}/>
+                    {recipes.map(({images, uuid, title, description}) => (
+                        <RecipeCardTemplate images={images} uuid={uuid} key={uuid} title={title} description={description}/>
                     ))}
                 </section>
             </div>

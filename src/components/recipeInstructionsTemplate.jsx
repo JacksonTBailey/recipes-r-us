@@ -1,15 +1,35 @@
 import React from 'react'
+import {NavLink} from 'react-router-dom'
+
 
 export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipes}) {
     const recipeMatch = recipes.find(recipe=> recipe.uuid === uuid)
 
     return (
         <React.Fragment>
-            <div className='recipe-page' key={uuid} id={uuid}>
-                <section className='page-header'>
-                        <figure><img src={`http://localhost:3001${recipeMatch.images.full}`} alt={recipeMatch.description} /></figure>
-                        <h1 className='recipe-title'>{recipeMatch.title}</h1>
-                        <p className='recipe-description'>{recipeMatch.description}</p>
+            <div className='recipe-page-flex' key={uuid} id={uuid}>
+                <div className='recipe-page-grid'>
+                    <section className='page-header'>
+                            <figure><img src={`http://localhost:3001${recipeMatch.images.full}`} alt={recipeMatch.description} className='header-image'/></figure>
+                            <div className='header-content'>
+                                <h1 className='recipe-title'>{recipeMatch.title}</h1>
+                                <p className='recipe-description'>{recipeMatch.description}</p>
+                                <div className='recipe-summary-features'>
+                                    <div className='recipe-summary-ingredients'>
+                                        <p className='recipe-ingredients-total'>{recipeMatch.ingredients.length}</p>
+                                        <p className='recipe-ingredients-content'>Ingredients</p>
+                                    </div>
+                                    <div className='recipe-summary-time'>
+                                        <p className='recipe-prep-time'>{recipeMatch.prepTime + recipeMatch.cookTime}</p>
+                                        <p className='recipe-prep-content'>Minutes</p>
+                                    </div>
+                                </div>
+                                <div className='recipe-buttons'>
+                                    <NavLink to={`/recipes/:${uuid}#recipe-directions`} className='recipe-directions-link'><button>Read Directions</button></NavLink>
+                                    <NavLink to={`/recipes/:${uuid}#recipe-directions`} className='recipe-edit-link'><button>Edit Recipe</button></NavLink>
+                                </div>
+                            </div>
+
                     </section>
                     
                     <section className='quick-glance-notes'>
@@ -34,13 +54,14 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
                         ))}
                     </section>
 
-                    <section className='recipe-instructions'>
+                    <section className='recipe-instructions' id='recipe-directions'>
                         {recipeMatch.directions.map(({instructions, optional}, i)=>(
                             <div className='recipe-instruction' key={i}>
                                 <p className='instruction' key={i}>{(optional===true) ?  <span>optional </span> : null }{instructions}</p>
                             </div>
                         ))}
                     </section>
+                </div>
             </div>        
         </React.Fragment>
     )

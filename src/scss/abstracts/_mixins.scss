@@ -1,36 +1,55 @@
 @use './colors' as c;
 
 
-//Large Screen - 993 to 1170 screen size
-@mixin lg-screen{
-    @media only screen and (max-width: 1170px) {
-        @content;
-    }
-}
-
-//Medium Screen - 768 to 992 screen size
-@mixin md-screen{
-    @media only screen and (max-width: 992px) {
-        @content;
-    }
-}
-
-//Medium Screen - 575 to 767 screen size
-@mixin sm-screen{
-    @media only screen and (max-width: 767px) {
-        @content;
-    }
-}
-
-//Medium Screen - below 575 screen size
-@mixin xs-screen{
-    @media only screen and (max-width: 575px) {
-        @content;
-    }
-}
-
 //Basic recipe card template
-@mixin cardStyling($color) {
+@mixin cardStyling($color, $color2, $color3) {
     display: inline-grid;
     background-color: $color;
+    text-decoration:none;
+    border-radius: 3%;
+    
+    &:hover{
+        box-shadow: 10px 10px 20px $color3;
+        transition: .3s; 
+        
+        h2{
+         color: $color2;
+         transition: .3s;
+        }
+    }
+}
+
+@mixin gridParent($gridType, $gridColumns) {
+    display: $gridType;
+    grid-template-columns: repeat($gridColumns, 1fr);
+    @content;
+}
+
+@mixin gridChild($grid-row-start, $grid-row-end, $grid-column-start, $grid-column-end){
+    grid-row-start: $grid-row-start;
+    grid-row-end: $grid-row-end;
+    grid-column-start: $grid-column-start;
+    grid-column-end: $grid-column-end;
+    @content;
+}
+
+@mixin button($color, $background1, $background2, $background3, $topBottom, $leftRight, $fontSize){
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    color: $color;
+    background-image: linear-gradient(to right, $background1, 0%, $background2, 51%, $background3);
+    padding: $topBottom $leftRight;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 1s cubic-bezier(.25,.8,.25,1);
+    border-radius: 15px;
+    border: none;
+    background-size: 200% auto;
+    font-size: $fontSize;
+    white-space: nowrap;
+
+    &:hover{
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        background-position: right center;
+    }
 }
