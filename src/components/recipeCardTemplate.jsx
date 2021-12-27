@@ -29,17 +29,17 @@ export default function RecipeCardTemplate({images, title, uuid, description, se
                 <article className='recipe-card' id={uuid}>
                     <figure className='recipe-img'>
                         <img src={`http://localhost:3001${(screenSize.dynamicWidth >= 993) ? images.medium : images.small}`} alt={`${title}`}/>
+                        {/* <div className='image-overlay'>
+                            <p className='cook-time'>Time: {cookTime + prepTime} minutes</p>
+                            <p className='serving-size'>Serves: {servings}</p>
+                        </div> */}
                     </figure>
 
-                    <header className='recipe-content'>
-                        <h2 className='recipe-header'>{title}</h2>
-                        <p className='recipe-description'>{description}</p>
-                    </header>
-
-                    <footer className='recipe-content'>
-                        <p className='serving-size'>serves {servings}</p>
-                        <p className='cook-time'>total time to make: {cookTime + prepTime} minutes</p>
-                    </footer>
+                    <section className='recipe-content'>
+                            <h2 className='recipe-header'>{title}</h2>
+                            <p className='recipe-description'>{description}</p>
+                    </section>
+                        
                 </article>
             </NavLink>    
         </React.Fragment>
