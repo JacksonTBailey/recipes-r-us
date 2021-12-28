@@ -1,9 +1,23 @@
+import Fraction from 'fraction.js'
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
 
 export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipes}) {
     const recipeMatch = recipes.find(recipe=> recipe.uuid === uuid)
+
+
+    //Converts decimals into simplified fractions
+    let fractionalize = (numToFraction) =>{
+        let x = Fraction(numToFraction);
+        let y = x.simplify().toFraction(true);
+        return y
+    }
+
+    let handleClick = (number) =>{
+        let promoClass = document.querySelector(`.special-text-${number}`);
+        promoClass.classList.toggle('active')
+    }
 
     return (
         <React.Fragment>
@@ -30,31 +44,26 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
                                 </div>
                             </div>
 
-                    </section>
-                    
-                    <section className='quick-glance-notes'>
-                        <p className='recipe-prep-time'>Prep in {recipeMatch.prepTime} Min</p>
-                        <p className='recipe-cook-time'>Ready in {recipeMatch.cookTime} Min</p>
-                        <p className='recipe-servings'>{recipeMatch.servings} servings</p>
-                    </section>
+                    </section>                    
 
-                    <section className='recipe-incredients'>
+                    <section className='recipe-ingredients'>
+                        <h2>Ingredients</h2>
+                        <p className='recipe-servings'>{recipeMatch.servings} servings</p>
                         {recipeMatch.ingredients.map(({name, amount, measurement, uuid})=>(
                             <div className={`recipe-ingredient ${name}`} key={uuid} id={uuid}>
-                                <p className='ingredient-name'>{name}</p>
+                                <p className='ingredient-amount-measurement'>{fractionalize(amount)} {measurement}<span className='ingredient-name'> {name}</span></p>
 
-                                {(uuid===specialRecipes[0].ingredientId) ? <p key={specialRecipes[0].ingredientId} className='special-recipe-ingredient'>{specialRecipes[0].title}, {specialRecipes[0].type}, {specialRecipes[0].text}</p> :
-                                (uuid===specialRecipes[1].ingredientId) ? <p key={specialRecipes[1].ingredientId} className='special-recipe-ingredient'>{specialRecipes[1].title}, {specialRecipes[1].type}, {specialRecipes[1].text}</p> :
-                                (uuid===specialRecipes[2].ingredientId) ? <p key={specialRecipes[2].ingredientId} className='special-recipe-ingredient'>{specialRecipes[2].title}, {specialRecipes[2].type}, {specialRecipes[2].text}</p> :
-                                (uuid===specialRecipes[3].ingredientId) ? <p key={specialRecipes[3].ingredientId} className='special-recipe-ingredient'>{specialRecipes[3].title}, {specialRecipes[3].type}, {specialRecipes[3].text}</p> : null}
+                                {(uuid===specialRecipes[0].ingredientId)? <div className='special-recipe'><button key={specialRecipes[0].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('0')}>{specialRecipes[0].title}</button> <p className='special-text special-text-0'>{specialRecipes[0].type} {specialRecipes[0].text}</p></div> :
+                                (uuid===specialRecipes[1].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[1].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('1')}>{specialRecipes[1].title}</button> <p className='special-text special-text-1'>{specialRecipes[1].type} {specialRecipes[1].text}</p></div> :
+                                (uuid===specialRecipes[2].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[2].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('2')}>{specialRecipes[2].title}</button> <p className='special-text special-text-2'>{specialRecipes[2].type} {specialRecipes[2].text}</p></div> :
+                                (uuid===specialRecipes[3].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[3].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('3')}>{specialRecipes[3].title}</button> <p className='special-text special-text-3'>{specialRecipes[3].type} {specialRecipes[3].text}</p></div> : null}
                                 
-                                
-                                <p className='ingredient-amount-measurement'>{amount} {measurement}</p>
                             </div>
                         ))}
                     </section>
 
                     <section className='recipe-instructions' id='recipe-directions'>
+                        <h2>Instructions</h2>
                         {recipeMatch.directions.map(({instructions, optional}, i)=>(
                             <div className='recipe-instruction' key={i}>
                                 <p className='instruction' key={i}>{(optional===true) ?  <span>optional </span> : null }{instructions}</p>
