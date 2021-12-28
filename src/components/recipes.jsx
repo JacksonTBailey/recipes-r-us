@@ -7,9 +7,12 @@ import Header from './header';
 export default function Recipes() {
     const recipeApi = `http://localhost:3001/recipes`;
     const specialRecipeApi = `http://localhost:3001/specials`;
+    const savedRecipes = JSON.parse(localStorage.getItem('recipes'));
+    const savedSpecialRecipe = JSON.parse(localStorage.getItem('specialRecipes'));
 
-    const [recipes, setRecipes] = useState([]);
-    const [specialRecipes, setSpecialRecipes] = useState([]);
+
+    const [recipes, setRecipes] = useState(savedRecipes || []);
+    const [specialRecipes, setSpecialRecipes] = useState(savedSpecialRecipe || []);
 
     const location = useLocation();
     const recipeID = location.pathname.split('/:').pop();
@@ -23,7 +26,7 @@ export default function Recipes() {
         })
         .then(response => {
             setRecipes(response)
-        }) 
+        })
     }, [recipeApi])
 
     //Getting data from special recipe API
@@ -38,7 +41,16 @@ export default function Recipes() {
         })
     }, [specialRecipeApi])
 
+    //Saving recipes and specialRecipes to local storage
+    useEffect(() => {
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+      }, [recipes]);
 
+    useEffect(() => {
+        localStorage.setItem('specialRecipes', JSON.stringify(specialRecipes));
+        }, [specialRecipes]);      
+
+        
     return (
         <React.Fragment>
             

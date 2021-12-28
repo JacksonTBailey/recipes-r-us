@@ -137,7 +137,7 @@
 }
 
 .recipe-ingredients{
-   @include a.gridParent(grid, 2);
+   @include a.gridParent(grid, 3);
    
    h2{
        @include a.gridChild(1,2,1,2);
@@ -146,7 +146,7 @@
        margin-bottom: 15px;
    }
    .recipe-servings{
-       @include a.gridChild(1,2,2,3);
+       @include a.gridChild(1,2,3,4);
        justify-self: center;
        align-self: center;
        font-size: 18px;
@@ -158,6 +158,22 @@
        font-size: 18px;
        word-wrap: normal;
        color: a.$charcoal;
+
+       &::after{
+        content: "";
+
+        display: block;
+        width: 100%;
+        height: 1px;
+        margin-top: 10px;
+        background-color: a.$lavender;
+        justify-content: center;
+        align-self:end;
+    }
+
+        .ingredient-amount-measurement{
+            margin-bottom: 5px;
+        }
        
        .ingredient-name{
             font-weight: bold;
@@ -176,5 +192,46 @@
     
     .active{
         display: flex;
+        margin:15px 0;
+    }
+
+    .special-highlight{
+        color: a.$white;
+        background-color: a.$manatee;
+        font-weight: bold;
+        align-self: center;
+        padding: 3px 5px;
+        margin-right: 10px;
+    }
+}
+
+.recipe-instructions{
+    @include a.gridParent(grid, 1);
+    margin-top: 50px;
+
+    h2{
+        @include a.gridChild(1,2,1,2);
+        font-size: 30px;
+        color: a.$charcoal;
+        margin-bottom: 25px;
+ 
+    }
+
+    .recipe-instruction{
+        font-size: 18px;
+        margin: 15px 0;
+        color: a.$charcoal;
+    }
+
+    .instruction-step{
+        font-weight:bold;
+    }
+
+    .optional-instruction{
+        color: a.$white;
+        background-color: a.$manatee;
+        font-weight: bold;
+        padding: 3px 5px;
+        margin: 0 10px;
     }
 }

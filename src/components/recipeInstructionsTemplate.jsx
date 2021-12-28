@@ -53,11 +53,29 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
                             <div className={`recipe-ingredient ${name}`} key={uuid} id={uuid}>
                                 <p className='ingredient-amount-measurement'>{fractionalize(amount)} {measurement}<span className='ingredient-name'> {name}</span></p>
 
-                                {(uuid===specialRecipes[0].ingredientId)? <div className='special-recipe'><button key={specialRecipes[0].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('0')}>{specialRecipes[0].title}</button> <p className='special-text special-text-0'>{specialRecipes[0].type} {specialRecipes[0].text}</p></div> :
-                                (uuid===specialRecipes[1].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[1].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('1')}>{specialRecipes[1].title}</button> <p className='special-text special-text-1'>{specialRecipes[1].type} {specialRecipes[1].text}</p></div> :
-                                (uuid===specialRecipes[2].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[2].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('2')}>{specialRecipes[2].title}</button> <p className='special-text special-text-2'>{specialRecipes[2].type} {specialRecipes[2].text}</p></div> :
-                                (uuid===specialRecipes[3].ingredientId) ? <div className='special-recipe'><button key={specialRecipes[3].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('3')}>{specialRecipes[3].title}</button> <p className='special-text special-text-3'>{specialRecipes[3].type} {specialRecipes[3].text}</p></div> : null}
-                                
+                                {(uuid===specialRecipes[0].ingredientId)? 
+                                    <div className='special-recipe'>
+                                        <button key={specialRecipes[0].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('0')}>{specialRecipes[0].title}</button> 
+                                        <p className='special-text special-text-0'><span className='special-highlight'>{specialRecipes[0].type}</span> {specialRecipes[0].text}</p>
+                                    </div> :
+
+                                (uuid===specialRecipes[1].ingredientId) ? 
+                                    <div className='special-recipe'>
+                                        <button key={specialRecipes[1].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('1')}>{specialRecipes[1].title}</button> 
+                                        <p className='special-text special-text-1'><span className='special-highlight'>{specialRecipes[1].type}</span> {specialRecipes[1].text}</p>
+                                    </div> :
+
+                                (uuid===specialRecipes[2].ingredientId) ? 
+                                    <div className='special-recipe'>
+                                        <button key={specialRecipes[2].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('2')}>{specialRecipes[2].title}</button> 
+                                        <p className='special-text special-text-2'><span className='special-highlight'>{specialRecipes[2].type}</span> {specialRecipes[2].text}</p>
+                                    </div> :
+
+                                (uuid===specialRecipes[3].ingredientId) ? 
+                                    <div className='special-recipe'>
+                                        <button key={specialRecipes[3].ingredientId} className='special-recipe-ingredient' onClick={()=>handleClick('3')}>{specialRecipes[3].title}</button> 
+                                        <p className='special-text special-text-3'><span className='special-highlight'>{specialRecipes[3].type}</span> {specialRecipes[3].text}</p>
+                                    </div> : null}                              
                             </div>
                         ))}
                     </section>
@@ -66,7 +84,7 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
                         <h2>Instructions</h2>
                         {recipeMatch.directions.map(({instructions, optional}, i)=>(
                             <div className='recipe-instruction' key={i}>
-                                <p className='instruction' key={i}>{(optional===true) ?  <span>optional </span> : null }{instructions}</p>
+                                <p className='instruction' key={i}><span className='instruction-step'>Step {i+1}: </span>{(optional===true) ?  <span className='optional-instruction'>optional </span> : null } {instructions}</p>
                             </div>
                         ))}
                     </section>
