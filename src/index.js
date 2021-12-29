@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Recipes from './components/recipes';
 import './scss/style.scss';
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <Routes>
       <Route path = "/*" element={<Recipes/>}/>
     </Routes>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('root')
 );
 

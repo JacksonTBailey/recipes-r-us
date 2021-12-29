@@ -44,23 +44,24 @@ export default function Recipes() {
     //Saving recipes and specialRecipes to local storage
     useEffect(() => {
         localStorage.setItem('recipes', JSON.stringify(recipes));
-      }, [recipes]);
-
-    useEffect(() => {
         localStorage.setItem('specialRecipes', JSON.stringify(specialRecipes));
-        }, [specialRecipes]);      
+      }, [recipes, specialRecipes]);
 
-        
+      
+    useEffect(()=>{
+        document.getElementById("root").scrollTo(0, 0)
+    }, [location])
+    
+    
     return (
         <React.Fragment>
-            
             <Header/>
-
             <Routes>
                 <Route path='/'>
                     <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
                     <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
                     <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
+                    <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
                 </Route>
             </Routes>
         </React.Fragment>

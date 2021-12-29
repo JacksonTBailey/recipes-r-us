@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 export default function Header() {
 
@@ -17,7 +17,6 @@ export default function Header() {
         }
 
 
-
     return (
         <React.Fragment>
             <header className='primary-header'>
@@ -26,7 +25,7 @@ export default function Header() {
                 <nav>
                     <ul id= "primary-navigation" className="primary-navigation flex" data-visible="false">
                         <li>
-                            <Link to='/recipes' className='navbar-link' onClick={hamburgerToggle}>Recipes</Link>
+                            <NavLink to='/recipes' className='navbar-link' onClick={hamburgerToggle}>Recipes</NavLink>
                         </li>
                     </ul>
                 </nav>
