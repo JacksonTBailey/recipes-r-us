@@ -48,7 +48,7 @@
     }
 }
 
-@media screen and (min-width:630px) and (max-width: 1439px){
+@media screen and (min-width:630px) and (max-width: 1225px){
     .recipe-card-product{
         grid-template-columns: repeat(1, 1fr);
         width: auto;
@@ -64,7 +64,7 @@
 }
 
 
-@media screen and (min-width:1200px){
+@media screen and (min-width:1226px){
     .recipe-card-product{
         grid-template-columns: repeat(2, 1fr);
         width: auto;

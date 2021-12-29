@@ -39,7 +39,10 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
                                     </div>
                                 </div>
                                 <div className='recipe-buttons'>
-                                    <NavLink to={`/recipes/:${uuid}#recipe-directions`} className='recipe-directions-link'><button>Read Directions</button></NavLink>
+                                    <a href="#recipe-directions" className='recipe-directions-link'>
+                                        <button type="submit" className='recipe-directions-link'>Read Directions</button>
+                                    </a>
+                                    
                                     <NavLink to={`/recipes/:${uuid}#recipe-directions`} className='recipe-edit-link'><button>Edit Recipe</button></NavLink>
                                 </div>
                             </div>
