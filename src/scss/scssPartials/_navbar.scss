@@ -31,6 +31,7 @@
         }
          > [aria-hidden = "true"]{
             font-weight: 700;
+            font-size: 45px;
             margin-inline-end: .5em;
         }
         
@@ -79,6 +80,10 @@
         .mobile-nav-toggle[aria-expanded="true"]{
             background-image: url("../../images/icon-close.svg");
         }
+        .navbar-link[data-visible="true"]{
+            transform: translateX(0%);
+        }
+
     }
 
     @media (min-width:35em) and (max-width:55em){
@@ -100,4 +105,16 @@
     display: flex;
     gap: var(--gap, 1rem);
     justify-content: flex-end;
+}
+
+@media (max-width:35em) {
+    .primary-header{
+        .primary-navigation{
+            .navbar-link{
+                color: a.$pomegranate;
+                font-size: 40px;
+                font-weight: bold;
+            }
+        }
+    }        
 }

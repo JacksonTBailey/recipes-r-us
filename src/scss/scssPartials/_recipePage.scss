@@ -10,7 +10,7 @@
 
 .recipe-page-grid{
     display: grid;
-    max-width: clamp(10px, 90vw, 480px);
+    max-width: clamp(250px, 90vw, 480px);
 }
 
 .page-header{
@@ -124,12 +124,13 @@
     figure{
         grid-column: 1/2;
         grid-row: 1/2;
-        max-height: clamp(10px, 90vw, 480px);
+        max-width: clamp(250px, 90vw, 480px);
+        max-height: clamp(250px, 90vw, 480px);
         justify-self: center;
 
         .header-image{
-            width: clamp(10px, 90vw, 480px);
-            height: clamp(10px, 90vw, 480px);
+            width: clamp(250px, 90vw, 480px);
+            height: clamp(250px, 90vw, 480px);
             object-fit: cover;
             border-radius: 3%;
         }

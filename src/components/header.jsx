@@ -9,12 +9,14 @@ export default function Header() {
         const visibility = primaryNav.getAttribute('data-visible');
             if (visibility==="true"){
                 primaryNav.setAttribute("data-visible", false);
-                navToggle.setAttribute('aria-expanded', false)
+                navToggle.setAttribute('aria-expanded', false);
             } else {
                 primaryNav.setAttribute("data-visible", true); 
                 navToggle.setAttribute('aria-expanded', true);
             }
         }
+
+
 
     return (
         <React.Fragment>
@@ -24,7 +26,7 @@ export default function Header() {
                 <nav>
                     <ul id= "primary-navigation" className="primary-navigation flex" data-visible="false">
                         <li>
-                            <Link to='/recipes' className='navbar-link'>Recipes</Link>
+                            <Link to='/recipes' className='navbar-link' onClick={hamburgerToggle}>Recipes</Link>
                         </li>
                     </ul>
                 </nav>
