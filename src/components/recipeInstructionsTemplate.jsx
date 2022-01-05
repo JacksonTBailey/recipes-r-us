@@ -1,6 +1,6 @@
 import Fraction from 'fraction.js'
 import React from 'react'
-import {NavLink} from 'react-router-dom';
+
 
 
 export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipes}) {
