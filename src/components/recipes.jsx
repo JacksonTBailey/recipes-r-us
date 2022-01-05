@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, useLocation, NavLink} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, useLocation, Navigate} from 'react-router-dom';
 import RecipeCard from './recipeCard';
 import RecipeInstructionsTemplate from './recipeInstructionsTemplate';
 import Header from './header';
@@ -26,6 +26,7 @@ export default function Recipes() {
         })
         .then(response => {
             setRecipes(response)
+            localStorage.setItem('recipes', JSON.stringify(recipes));
         })
     }, [recipeApi])
 
@@ -38,14 +39,9 @@ export default function Recipes() {
         })
         .then(response => {
             setSpecialRecipes(response)
+            localStorage.setItem('specialRecipes', JSON.stringify(specialRecipes));
         })
     }, [specialRecipeApi])
-
-    //Saving recipes and specialRecipes to local storage
-    useEffect(() => {
-        localStorage.setItem('recipes', JSON.stringify(recipes));
-        localStorage.setItem('specialRecipes', JSON.stringify(specialRecipes));
-      }, [recipes, specialRecipes]);
 
       
     useEffect(()=>{
@@ -57,12 +53,10 @@ export default function Recipes() {
         <React.Fragment>
             <Header/>
             <Routes>
-                <Route path='/'>
-                    <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
-                    <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
-                    <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
-                    <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
-                </Route>
+                <Route path='/' element= {<Navigate replace to= '/recipes/' />} />
+                <Route path='/recipes' element={<RecipeCard recipes={recipes}/>} />
+                <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>} />
+                <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
             </Routes>
         </React.Fragment>
     )
