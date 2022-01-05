@@ -1,6 +1,6 @@
 import Fraction from 'fraction.js'
 import React from 'react'
-import {NavLink} from 'react-router-dom';
+
 
 
 export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipes}) {
@@ -23,7 +23,7 @@ export default function RecipeInstructionsTemplate({recipes, uuid, specialRecipe
         <div className='recipe-page-flex' key={uuid} id={uuid}>
             <div className='recipe-page-grid'>
                 <section className='page-header'>
-                        <figure><img src={`http://localhost:3001${recipeMatch.images.full}`} alt={recipeMatch.description} className='header-image'/></figure>
+                        <figure><img src={`${recipeMatch.images.full}`} alt={recipeMatch.description} className='header-image'/></figure>
                         <div className='header-content'>
                             <h1 className='recipe-title'>{recipeMatch.title}</h1>
                             <p className='recipe-description'>{recipeMatch.description}</p>

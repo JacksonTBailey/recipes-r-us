@@ -5,8 +5,8 @@ import RecipeInstructionsTemplate from './recipeInstructionsTemplate';
 import Header from './header';
 
 export default function Recipes() {
-    const recipeApi = `http://localhost:3001/recipes`;
-    const specialRecipeApi = `http://localhost:3001/specials`;
+    const recipeApi = `https://recipes-api-data.herokuapp.com/recipes`;
+    const specialRecipeApi = `https://recipes-api-data.herokuapp.com/specials`;
     const savedRecipes = JSON.parse(localStorage.getItem('recipes'));
     const savedSpecialRecipe = JSON.parse(localStorage.getItem('specialRecipes'));
 
