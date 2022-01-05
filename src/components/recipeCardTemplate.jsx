@@ -24,18 +24,20 @@ export default function RecipeCardTemplate({images, title, uuid, description}) {
 
 
     return (
-        <NavLink to={`/recipes/:${uuid}`} className='recipe-link' key={uuid}>
-            <article className='recipe-card' id={uuid}>
-                <figure className='recipe-img'>
-                    <img src={`http://localhost:3001${(screenSize.dynamicWidth >= 265) ? images.medium : images.small}`} alt={`${title}`}/>
-                </figure>
+        <React.Fragment>
+            <NavLink to={`/recipes/:${uuid}`} className='recipe-link' key={uuid}>
+                <article className='recipe-card' id={uuid}>
+                    <figure className='recipe-img'>
+                        <img src={`http://localhost:3001${(screenSize.dynamicWidth >= 265) ? images.medium : images.small}`} alt={`${title}`}/>
+                    </figure>
 
-                <section className='recipe-content'>
-                        <h2 className='recipe-header'>{title}</h2>
-                        <p className='recipe-description'>{description}</p>
-                </section>
-                    
-            </article>
-        </NavLink>    
+                    <section className='recipe-content'>
+                            <h2 className='recipe-header'>{title}</h2>
+                            <p className='recipe-description'>{description}</p>
+                    </section>
+                        
+                </article>
+            </NavLink>    
+        </React.Fragment>
     )
 }

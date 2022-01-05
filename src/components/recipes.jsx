@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Routes, Route, useLocation, NavLink, Navigate} from 'react-router-dom';
-import RecipeCards from './recipeCards';
+import {BrowserRouter as Router, Routes, Route, useLocation, NavLink} from 'react-router-dom';
+import RecipeCard from './recipeCard';
 import RecipeInstructionsTemplate from './recipeInstructionsTemplate';
 import Header from './header';
 
@@ -17,7 +17,7 @@ export default function Recipes() {
     const location = useLocation();
     const recipeID = location.pathname.split('/:').pop();
 
-    //Getting data from regular recipe API and saving to local storage
+    //Getting data from regular recipe API
     useEffect(() => {
         fetch(recipeApi)        
         .then((response) => {
@@ -25,12 +25,11 @@ export default function Recipes() {
             return res
         })
         .then(response => {
-            setRecipes(response);
-            localStorage.setItem('recipes', JSON.stringify(response));
+            setRecipes(response)
         })
     }, [recipeApi])
 
-    //Getting data from special recipe API and saving to local storage
+    //Getting data from special recipe API
     useEffect(() => {
         fetch(specialRecipeApi)        
         .then((response) => {
@@ -38,13 +37,17 @@ export default function Recipes() {
             return res
         })
         .then(response => {
-            setSpecialRecipes(response);
-            localStorage.setItem('specialRecipes', JSON.stringify(response));
+            setSpecialRecipes(response)
         })
     }, [specialRecipeApi])
 
-    
-    //Scrolls to top of page whenever a link takes you to a new page (Necessary since React Router v6 doesn't automatically do it)
+    //Saving recipes and specialRecipes to local storage
+    useEffect(() => {
+        localStorage.setItem('recipes', JSON.stringify(recipes));
+        localStorage.setItem('specialRecipes', JSON.stringify(specialRecipes));
+      }, [recipes, specialRecipes]);
+
+      
     useEffect(()=>{
         document.getElementById("root").scrollTo(0, 0)
     }, [location])
@@ -54,10 +57,12 @@ export default function Recipes() {
         <React.Fragment>
             <Header/>
             <Routes>
-                <Route path = '/' element= {<Navigate replace to='/recipes'/> } />
-                <Route path='/recipes' element={<RecipeCards recipes={recipes}/>} />
-                <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>} />
-                <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
+                <Route path='/'>
+                    <Route index element = {<RecipeCard recipes={recipes}/> }></Route>
+                    <Route path='/recipes' element={<RecipeCard recipes={recipes}/>}></Route>
+                    <Route path={`/recipes/:${recipeID}`} element={<RecipeInstructionsTemplate recipes={recipes} uuid={recipeID} specialRecipes={specialRecipes}/>}></Route>
+                    <Route path="*" element={<main style={{ padding: "1rem" }}><p>There's nothing here!</p></main>}/>
+                </Route>
             </Routes>
         </React.Fragment>
     )
